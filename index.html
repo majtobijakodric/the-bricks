@@ -9,8 +9,14 @@
   </head>
   <body>
     <div id="app">
+      <div class="fixed top-3 right-3 z-20 flex items-center gap-2">
+        <button id="pauseButton" type="button" class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Pause</button>
+        <button id="aboutButton" type="button" class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">About</button>
+      </div>
+      
       <canvas id="gameCanvas" width="800" height="600"></canvas>
     </div>
     <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="./src/buttons.ts"></script>
   </body>
 </html>

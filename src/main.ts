@@ -1,6 +1,8 @@
 import './style.css';
 
 const gameCanvas = document.querySelector<HTMLCanvasElement>('#gameCanvas');
+export const aboutButton = document.querySelector<HTMLButtonElement>('#aboutButton');
+export const pauseButton = document.querySelector<HTMLButtonElement>('#pauseButton');
 
 let viewHeight = window.innerHeight;
 let viewWidth = window.innerWidth;
@@ -9,6 +11,8 @@ const ballColor = 'red';
 const padColor = 'blue';
 const backgroundColor = 'lightgray';
 const cellColor = 'green';
+
+export let isPaused = false;
 
 // Pad properties
 let pad = {
@@ -45,8 +49,6 @@ let cell = {
 const rows = 15;
 const columns = 20;
 let arrayOfCells: { x: number; y: number; width: number; height: number }[] = [];
-
-
 
 initializeBallVelocity();
 
@@ -89,7 +91,7 @@ function renderScene(canvas: HTMLCanvasElement) {
   if (ctx) {
     // Pad
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-   
+
     // Render cells
     renderCells(canvas);
     ctx.fillStyle = padColor;
@@ -113,7 +115,11 @@ function initializeBallVelocity() {
 }
 
 function animateBall() {
-  if (!gameCanvas) {
+  if (!gameCanvas) return;
+
+  if (isPaused) {
+    renderScene(gameCanvas);
+    requestAnimationFrame(animateBall);
     return;
   }
 
@@ -218,3 +224,13 @@ addEventListener("keyup", (event) => {
   if (event.key === "ArrowLeft") input.left = false;
   if (event.key === "ArrowRight") input.right = false;
 });
+
+export function pauseGame() {
+  isPaused = true;
+  input.left = false;
+  input.right = false;
+}
+
+export function resumeGame() {
+  isPaused = false;
+}
