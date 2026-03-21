@@ -7,6 +7,7 @@ let viewWidth = window.innerWidth;
 
 const ballColor = 'red';
 const padColor = 'blue';
+const backgroundColor = 'yellow';
 
 // Pad properties
 let pad = {
@@ -39,7 +40,7 @@ if (gameCanvas) {
   gameCanvas.height = viewHeight;
   gameCanvas.style.width = `${viewWidth}px`;
   gameCanvas.style.height = `${viewHeight}px`;
-  gameCanvas.style.backgroundColor = 'lightgray';
+  gameCanvas.style.backgroundColor = backgroundColor;
   renderScene(gameCanvas);
   animateBall();
 }
