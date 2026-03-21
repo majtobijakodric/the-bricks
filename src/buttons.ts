@@ -4,6 +4,7 @@ import { pauseGame, resumeGame, aboutButton, pauseButton, isPaused, ballSpeedBut
 
 if (aboutButton) {
     aboutButton.addEventListener("click", async () => {
+        const wasPaused = isPaused;
         pauseGame();
 
         await Swal.fire({
@@ -15,7 +16,10 @@ if (aboutButton) {
             icon: "info",
             confirmButtonText: "Close"
         });
-        resumeGame();
+
+        if (!wasPaused) {
+            resumeGame();
+        }
     });
 }
 
@@ -23,10 +27,8 @@ if (pauseButton) {
     pauseButton.addEventListener("click", () => {
         if (isPaused) {
             resumeGame();
-            pauseButton!.textContent = "Pause";
         } else {
             pauseGame();
-            pauseButton!.textContent = "Resume";
         }
     });
 }

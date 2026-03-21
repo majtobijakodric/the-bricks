@@ -242,8 +242,14 @@ export function pauseGame() {
   isPaused = true;
   input.left = false;
   input.right = false;
+  if (pauseButton) {
+    pauseButton.textContent = "Resume";
+  }
 }
 
 export function resumeGame() {
   isPaused = false;
+  if (pauseButton) {
+    pauseButton.textContent = "Pause";
+  }
 }
