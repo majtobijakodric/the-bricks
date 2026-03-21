@@ -7,13 +7,14 @@ let viewWidth = window.innerWidth;
 
 const ballColor = 'red';
 const padColor = 'blue';
-const backgroundColor = 'yellow';
+const backgroundColor = 'lightgray';
+const cellColor = 'green';
 
 // Pad properties
 let pad = {
   x: viewWidth / 2 - 25,
   y: viewHeight - 50,
-  width: 50,
+  width: 100,
   height: 20,
   speed: 4 // Pixels per frame
 };
@@ -33,6 +34,20 @@ let input = {
   right: false,
 };
 
+let cell = {
+  width: 50,
+  height: 20,
+  marginLeftRight: 10,
+  marginTop: 10,
+  padding: 5,
+}
+
+const rows = 15;
+const columns = 20;
+let arrayOfCells: { x: number; y: number; width: number; height: number }[] = [];
+
+
+
 initializeBallVelocity();
 
 if (gameCanvas) {
@@ -41,8 +56,32 @@ if (gameCanvas) {
   gameCanvas.style.width = `${viewWidth}px`;
   gameCanvas.style.height = `${viewHeight}px`;
   gameCanvas.style.backgroundColor = backgroundColor;
+  initializeArray();
   renderScene(gameCanvas);
   animateBall();
+}
+
+function initializeArray() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      arrayOfCells.push({
+        x: cell.marginLeftRight + (j * (cell.width + cell.marginLeftRight)),
+        y: cell.marginTop + (i * (cell.height + cell.marginTop)),
+        width: cell.width,
+        height: cell.height
+      });
+    }
+  }
+}
+
+function renderCells(canvas: HTMLCanvasElement) {
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+    ctx.fillStyle = cellColor;
+    arrayOfCells.forEach(cell => {
+      ctx.fillRect(cell.x, cell.y, cell.width, cell.height);
+    });
+  }
 }
 
 function renderScene(canvas: HTMLCanvasElement) {
@@ -50,6 +89,9 @@ function renderScene(canvas: HTMLCanvasElement) {
   if (ctx) {
     // Pad
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+   
+    // Render cells
+    renderCells(canvas);
     ctx.fillStyle = padColor;
     ctx.fillRect(pad.x, pad.y, pad.width, pad.height);
 
