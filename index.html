@@ -1,21 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/bricks/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bricks</title>
-    <script type="module" crossorigin src="/bricks/assets/index-Bk27pf1C.js"></script>
-    <link rel="stylesheet" crossorigin href="/bricks/assets/index-BlWNgvvh.css">
-  </head>
-  <body>
-    <div id="app">
-      <div class="fixed top-3 right-3 z-20 flex items-center gap-2">
-        <button id="pauseButton" type="button" class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Pause</button>
-        <button id="aboutButton" type="button" class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">About</button>
-      </div>
-      
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/bricks/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Bricks</title>
+  <script type="module" crossorigin src="/bricks/assets/index-Dpm8k0hD.js"></script>
+  <link rel="stylesheet" crossorigin href="/bricks/assets/index-BlWNgvvh.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="fixed top-3 right-3 z-20 flex items-center gap-2">
+
+      <button id="pauseButton" type="button"
+        class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Pause</button>
+
+      <button id="ballSpeedButton" type="button"
+        class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Ball speed</button>
+
+      <button id="padSpeedButton" type="button"
+        class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Pad speed</button>
+
+      <button id="aboutButton" type="button"
+        class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">About</button>
     </div>
-  </body>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+  </div>
+</body>
+
 </html>
