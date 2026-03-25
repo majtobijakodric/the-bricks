@@ -6,6 +6,7 @@ export let refreshRateEstimate = await updateRefreshRateEstimate();
 setInterval(() => {
   void updateRefreshRateEstimate().then((refreshRate) => {
     refreshRateEstimate = refreshRate;
+
   });
 }, 1000);
 
@@ -61,11 +62,7 @@ const rows = 15;
 const columns = 20;
 let arrayOfCells: { x: number; y: number; width: number; height: number }[] = [];
 
-console.log(refreshRateEstimate);
 initializeBallVelocity();
-
-
-
 
 if (gameCanvas) {
   gameCanvas.width = viewWidth;
@@ -103,6 +100,8 @@ function renderCells(canvas: HTMLCanvasElement) {
 
 function renderScene(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext('2d');
+    console.log(refreshRateEstimate);
+
   if (ctx) {
     // Pad
     ctx.clearRect(0, 0, canvas.width, canvas.height);
