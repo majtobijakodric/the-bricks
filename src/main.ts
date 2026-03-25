@@ -23,6 +23,8 @@ const ballColor = 'red';
 const padColor = 'blue';
 const backgroundColor = 'lightgray';
 const cellColor = 'green';
+const CELL_SIDE_MARGIN_RATIO = 0.2;
+const CELL_TOP_MARGIN_RATIO = 0.1;
 
 export let isPaused = false;
 
@@ -76,12 +78,20 @@ if (gameCanvas) {
 }
 
 function initializeArray() {
+  arrayOfCells = [];
+
+  const startX = viewWidth * CELL_SIDE_MARGIN_RATIO;
+  const startY = viewHeight * CELL_TOP_MARGIN_RATIO;
+  const availableWidth = viewWidth * (1 - CELL_SIDE_MARGIN_RATIO * 2);
+  const totalHorizontalSpacing = cell.marginLeftRight * (columns - 1);
+  const cellWidth = (availableWidth - totalHorizontalSpacing) / columns;
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
       arrayOfCells.push({
-        x: cell.marginLeftRight + (j * (cell.width + cell.marginLeftRight)),
-        y: cell.marginTop + (i * (cell.height + cell.marginTop)),
-        width: cell.width,
+        x: startX + (j * (cellWidth + cell.marginLeftRight)),
+        y: startY + (i * (cell.height + cell.marginTop)),
+        width: cellWidth,
         height: cell.height
       });
     }
@@ -231,6 +241,7 @@ addEventListener("resize", () => {
     gameCanvas.height = viewHeight;
     gameCanvas.style.width = `${viewWidth}px`;
     gameCanvas.style.height = `${viewHeight}px`;
+    initializeArray();
     ball.x = viewWidth / 2;
     ball.y = viewHeight / 2;
     pad.x = viewWidth / 2 - pad.width / 2;
