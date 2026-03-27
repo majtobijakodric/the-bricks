@@ -4,15 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/bricks/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/style.css">
   <title>The Bricks</title>
-  <script type="module" crossorigin src="/bricks/assets/index-MR5GM9G5.js"></script>
+  <script type="module" crossorigin src="/bricks/assets/index-CD__ZNmX.js"></script>
   <link rel="stylesheet" crossorigin href="/bricks/assets/index-BlWNgvvh.css">
 </head>
 
 <body>
   <div id="app">
     <div class="fixed top-3 right-3 z-20 flex items-center gap-2">
+      <p id="scoreText" type="button"
+        class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Score: 0</p>
 
       <button id="pauseButton" type="button"
         class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">Pause</button>
@@ -28,7 +31,7 @@
     </div>
 
     <canvas id="gameCanvas" width="800" height="600"></canvas>
-  </div>
+  </div>
 </body>
 
 </html>
