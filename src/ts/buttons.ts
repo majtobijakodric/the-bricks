@@ -45,7 +45,7 @@ if (ballSpeedButton) {
       inputLabel: 'Ball Speed',
       inputAttributes: {
         min: '1',
-        max: '20',
+        max: '100',
         step: '1',
       },
       inputValue: ball.speed,
@@ -66,7 +66,7 @@ if (padSpeedButton) {
       inputLabel: 'Pad Speed',
       inputAttributes: {
         min: '1',
-        max: '20',
+        max: '40',
         step: '1',
       },
       inputValue: pad.speed,
