@@ -34,8 +34,8 @@ export const input = {
 };
 
 export const cell = {
-  width: 50,
-  height: 20,
+  width: 15,
+  height: 22,
   marginLeftRight: 10,
   marginTop: 10,
   padding: 5,

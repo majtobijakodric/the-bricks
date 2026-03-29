@@ -1,6 +1,6 @@
 import { gameCanvas } from './canvas.ts';
 import { bricks } from './bricks.ts';
-import { ball, ballColor, brickColor, pad, padColor } from './gameState.ts';
+import { ball, ballColor, pad, padColor } from './gameState.ts';
 
 export function renderScene() {
   if (!gameCanvas) {
@@ -27,8 +27,8 @@ export function renderScene() {
 }
 
 function renderBricks(ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = brickColor;
   bricks.forEach((brick) => {
+    ctx.fillStyle = brick.color;
     ctx.fillRect(brick.x, brick.y, brick.width, brick.height);
   });
 }

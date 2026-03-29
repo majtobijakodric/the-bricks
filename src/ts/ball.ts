@@ -115,7 +115,7 @@ export function handleBrickCollisions() {
     bounceBallOffBrick(brick);
     playBrickHitSound();
     removeBrickAtIndex(index);
-    updateScore(1);
+    updateScore(brick.points);
     return;
   }
 }
