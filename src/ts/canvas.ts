@@ -1,5 +1,4 @@
 import { canvasConfig } from './config.ts';
-import { backgroundColor } from './gameState.ts';
 
 export const gameCanvas = document.querySelector<HTMLCanvasElement>('#gameCanvas');
 export const aboutButton = document.querySelector<HTMLButtonElement>('#aboutButton');
@@ -14,5 +13,5 @@ export function setupCanvasSize() {
   gameCanvas.height = canvasConfig.height;
   gameCanvas.style.width = `${canvasConfig.width}px`;
   gameCanvas.style.height = `${canvasConfig.height}px`;
-  gameCanvas.style.backgroundColor = backgroundColor;
+  gameCanvas.style.backgroundColor = 'transparent';
 }

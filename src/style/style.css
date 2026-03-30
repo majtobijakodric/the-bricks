@@ -45,3 +45,9 @@ body.has-game-background {
   position: relative;
   z-index: 1;
 }
+
+#gameCanvas {
+  background: rgb(2 6 23 / 12%);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}

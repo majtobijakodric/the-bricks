@@ -34,7 +34,7 @@ const PLANET_IMAGE_URLS = [
 
 const PLANET_COUNT = 4;
 const PLANET_MIN_SIZE = 88;
-const PLANET_MAX_SIZE = 180;
+const PLANET_MAX_SIZE = 140;
 const PLANET_MARGIN = 24;
 const CANVAS_SAFE_GAP = 18;
 const PLANET_CONTAINER_ID = 'backgroundPlanets';
