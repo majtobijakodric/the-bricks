@@ -15,7 +15,7 @@ if (aboutButton) {
       title: 'About',
       html: `
       <p>Author: Maj Tobija Kodrič</p>
-      <a href="https://github.com/majtobijakodric/bricks" target="_blank" class="text-blue-500 hover:underline">GitHub</a>
+      <a href="https://github.com/majtobijakodric/the-bricks" target="_blank" class="text-blue-500 hover:underline">GitHub</a>
     `,
       icon: 'info',
       confirmButtonText: 'Close',
