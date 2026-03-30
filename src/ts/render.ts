@@ -19,6 +19,7 @@ export function renderScene() {
   ctx.fillStyle = padColor;
   ctx.fillRect(pad.x, pad.y, pad.width, pad.height);
 
+  // Ball
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
   ctx.fillStyle = ballColor;

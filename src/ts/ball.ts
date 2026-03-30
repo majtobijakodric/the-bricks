@@ -45,7 +45,10 @@ export function handlePadCollision() {
   const hitsPadVertically = ball.y + ball.radius >= pad.y && ball.y - ball.radius <= pad.y + pad.height;
 
   if (ball.dy > 0 && hitsPadHorizontally && hitsPadVertically) {
-    ball.dy *= -1;
+    const relativeHit = (ball.x - (pad.x + pad.width / 2)) / pad.width;
+
+    ball.dx = 8 * relativeHit;
+    ball.dy = -Math.abs(ball.dy);
     ball.y = pad.y - ball.radius;
   }
 }
