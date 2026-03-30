@@ -46,10 +46,22 @@ export const cell = {
 export const rows = brickLayoutConfig.rows;
 export const columns = brickLayoutConfig.columns;
 
-// Keeps the game area fixed.
-export function setViewportSize() {
+// Resets the fixed canvas size.
+export function resetCanvasSize() {
   canvasWidth = canvasConfig.width;
   canvasHeight = canvasConfig.height;
+}
+
+// Centers the ball on the canvas.
+export function resetBallPosition() {
+  ball.x = canvasWidth / 2;
+  ball.y = canvasHeight / 2;
+}
+
+// Puts the paddle back at the bottom center.
+export function resetPadPosition() {
+  pad.x = canvasWidth / 2 - pad.width / 2;
+  pad.y = canvasHeight - pad.height - 10;
 }
 
 export function setPaused(value: boolean) {
