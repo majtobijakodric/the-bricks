@@ -7,15 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./src/style.css">
   <title>The Bricks</title>
-  <script type="module" crossorigin src="/the-bricks/assets/index-Do_viu-H.js"></script>
-  <link rel="stylesheet" crossorigin href="/the-bricks/assets/index-DZwLAgn2.css">
+  <script type="module" crossorigin src="/the-bricks/assets/index-CssNwDAi.js"></script>
+  <link rel="stylesheet" crossorigin href="/the-bricks/assets/index-D2cRRz_t.css">
 </head>
 
 <body>
   <div id="app" class="min-h-screen px-4 py-6">
     <div class="mx-auto flex w-fit flex-col items-center gap-4">
       <div class="w-full rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 shadow-xl">
-        <div class="flex justify-end">
+        <div class="flex items-center justify-between gap-4">
+          <div id="livesText" class="flex items-center gap-1" aria-label="Lives"></div>
+
           <div class="flex flex-wrap items-center justify-end gap-2">
             <p id="scoreText"
               class="rounded-md border border-slate-700 bg-slate-900 px-3 py-1.5 text-sm font-medium text-white shadow">
@@ -34,10 +36,9 @@
 
             <button id="pauseButton" type="button"
               class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-              Pause
             </button>
 
-            <button id="ballSpeedButton" type="button"
+            <!-- <button id="ballSpeedButton" type="button"
               class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
               Ball speed
             </button>
@@ -45,11 +46,14 @@
             <button id="padSpeedButton" type="button"
               class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
               Pad speed
-            </button>
+            </button> -->
 
             <button id="aboutButton" type="button"
               class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-              About
+            </button>
+
+            <button id="muteButton" type="button"
+              class="rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
             </button>
           </div>
         </div>
