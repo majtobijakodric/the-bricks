@@ -34,8 +34,8 @@ export function restartGame() {
   resetScore();
   resetLives();
   resetBottomMissState();
-  resetBallPosition();
   resetPadPosition();
+  resetBallPosition();
   initializeBricks();
   initializeBallVelocity();
   resetGameOverModalState();

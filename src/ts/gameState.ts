@@ -55,10 +55,10 @@ export function resetCanvasSize() {
   canvasHeight = canvasConfig.height;
 }
 
-// Centers the ball on the canvas.
+// Places the ball just above the paddle.
 export function resetBallPosition() {
-  ball.x = canvasWidth / 2;
-  ball.y = canvasHeight / 2;
+  ball.x = pad.x + pad.width / 2;
+  ball.y = pad.y - ball.radius - 5;
 }
 
 // Puts the paddle back at the bottom center.

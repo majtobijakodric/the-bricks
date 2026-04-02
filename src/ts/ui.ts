@@ -13,7 +13,6 @@ const swalTheme = {
 
 const livesText = document.querySelector<HTMLDivElement>('#livesText');
 const scoreText = document.querySelector<HTMLParagraphElement>('#scoreText');
-const timerText = document.querySelector<HTMLParagraphElement>('#timerText');
 const modeText = document.querySelector<HTMLParagraphElement>('#modeText');
 const pauseButton = document.querySelector<HTMLButtonElement>('#pauseButton');
 let gameOverShown = false;
@@ -32,15 +31,6 @@ export function updateScoreText(score: number) {
   }
 
   scoreText.textContent = `Score: ${score}`;
-}
-
-// Updates the timer text.
-export function updateTimerText(time: string) {
-  if (!timerText) {
-    return;
-  }
-
-  timerText.textContent = `Time: ${time}`;
 }
 
 // Updates the mode text.
@@ -76,7 +66,6 @@ export function updatePauseButtonText(isPaused: boolean) {
 // Sets the first UI values.
 export function initializeUi() {
   updateScoreText(0);
-  updateTimerText('00:00');
   updateModeText(modeConfig.defaultMode);
   updatePauseButtonText(false);
   updateLivesText(lives);

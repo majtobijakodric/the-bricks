@@ -11,7 +11,7 @@ import {
   setGameOver,
   lives,
 } from './gameState.ts';
-import { playBrickHitSound } from './sound.ts';
+import { playBrickHitSound, playHeartLoseSound } from './sound.ts';
 import { updateScore } from './scoring.ts';
 import { showGameOverModal, updateLivesText } from './ui.ts';
 import { pad } from './gameState.ts';
@@ -59,6 +59,7 @@ export function handleWallCollisions() {
       if (!hasHandledBottomMiss) {
         loseLife();
         updateLivesText(lives);
+        playHeartLoseSound();
         markBottomMissHandled();
       }
 

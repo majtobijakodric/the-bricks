@@ -1,9 +1,16 @@
 import { input, isGameOver, pad } from './gameState.ts';
 import { movePad } from './pad.ts';
 import { renderScene } from './render.ts';
+import { prepareAudio } from './sound.ts';
 
 export function setupEventListeners() {
+  addEventListener('pointerdown', () => {
+    void prepareAudio();
+  });
+
   addEventListener('keydown', (event) => {
+    void prepareAudio();
+
     if (isGameOver) {
       return;
     }

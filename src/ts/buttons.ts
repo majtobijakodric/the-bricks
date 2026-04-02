@@ -6,7 +6,7 @@ import { aboutButton, ballSpeedButton, muteButton, padSpeedButton, pauseButton }
 import { pauseGame, resumeGame } from './gameControls.ts';
 import { ball, isPaused, pad } from './gameState.ts';
 import { setPadSpeed } from './pad.ts';
-import { toggleSoundMuted } from './sound.ts';
+import { prepareAudio, playButtonClickSound, toggleSoundMuted } from './sound.ts';
 
 const swalTheme = {
   background: '#111827',
@@ -36,6 +36,9 @@ if (aboutButton) {
   renderAboutButtonIcon(aboutButton);
 
   aboutButton.addEventListener('click', async () => {
+    await prepareAudio();
+    playButtonClickSound();
+
     const wasPaused = isPaused;
     pauseGame();
 
@@ -61,7 +64,10 @@ if (pauseButton) {
 
   renderPauseButtonIcon(button, isPaused);
 
-  button.addEventListener('click', () => {
+  button.addEventListener('click', async () => {
+    await prepareAudio();
+    playButtonClickSound();
+
     if (isPaused) {
       resumeGame();
       renderPauseButtonIcon(button, false);
@@ -77,14 +83,20 @@ if (muteButton) {
 
   renderMuteButtonIcon(button, false);
 
-  button.addEventListener('click', () => {
+  button.addEventListener('click', async () => {
+    await prepareAudio();
+    playButtonClickSound();
+
     const muted = toggleSoundMuted();
     renderMuteButtonIcon(button, muted);
   });
 }
 
 if (ballSpeedButton) {
-  ballSpeedButton.addEventListener('click', () => {
+  ballSpeedButton.addEventListener('click', async () => {
+    await prepareAudio();
+    playButtonClickSound();
+
     Swal.fire({
       title: 'Set Ball Speed',
       input: 'range',
@@ -106,7 +118,10 @@ if (ballSpeedButton) {
 }
 
 if (padSpeedButton) {
-  padSpeedButton.addEventListener('click', () => {
+  padSpeedButton.addEventListener('click', async () => {
+    await prepareAudio();
+    playButtonClickSound();
+
     Swal.fire({
       title: 'Set Pad Speed',
       input: 'range',

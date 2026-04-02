@@ -6,6 +6,7 @@ import { gameCanvas, setupCanvasSize } from './canvas.ts';
 import { initializeBricks } from './bricks.ts';
 import { setupEventListeners } from './events.ts';
 import { startGameLoop } from './gameLoop.ts';
+import { resetBallPosition, resetPadPosition } from './gameState.ts';
 import { renderScene } from './render.ts';
 import { updateRefreshRateEstimate } from './refreshRate.ts';
 import { initializeUi } from './ui.ts';
@@ -28,6 +29,8 @@ initializeUi();
 
 if (gameCanvas) {
   setupCanvasSize();
+  resetPadPosition();
+  resetBallPosition();
   initializeBackground();
   initializeBricks();
   renderScene();
