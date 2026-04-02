@@ -3,6 +3,7 @@ import { canvasConfig } from './config.ts';
 export const gameCanvas = document.querySelector<HTMLCanvasElement>('#gameCanvas');
 export const aboutButton = document.querySelector<HTMLButtonElement>('#aboutButton');
 export const pauseButton = document.querySelector<HTMLButtonElement>('#pauseButton');
+export const muteButton = document.querySelector<HTMLButtonElement>('#muteButton');
 export const ballSpeedButton = document.querySelector<HTMLButtonElement>('#ballSpeedButton');
 export const padSpeedButton = document.querySelector<HTMLButtonElement>('#padSpeedButton');
 

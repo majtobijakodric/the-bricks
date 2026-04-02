@@ -17,8 +17,11 @@
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/orbitron": "^5.2.8",
+    "@fontsource/oxanium": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
     "gh-pages": "^6.3.0",
+    "lucide": "^1.7.0",
     "sweetalert2": "^11.26.24",
     "tailwindcss": "^4.2.2"
   }

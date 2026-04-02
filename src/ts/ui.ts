@@ -39,7 +39,8 @@ export function updatePauseButtonText(isPaused: boolean) {
     return;
   }
 
-  pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+  pauseButton.title = isPaused ? 'Resume' : 'Pause';
+  pauseButton.setAttribute('aria-label', pauseButton.title);
 }
 
 // Sets the first UI values.
