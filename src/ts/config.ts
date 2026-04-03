@@ -63,7 +63,6 @@ export const soundConfig = {
 };
 
 export const featureConfig = {
-  showStars: true,
   useBonusBricks: true,
   enableSound: true,
   enableDeath: true,

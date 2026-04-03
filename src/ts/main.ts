@@ -8,21 +8,7 @@ import { setupEventListeners } from './events.ts';
 import { startGameLoop } from './gameLoop.ts';
 import { resetBallPosition, resetPadPosition } from './gameState.ts';
 import { renderScene } from './render.ts';
-import { updateRefreshRateEstimate } from './refreshRate.ts';
 import { initializeUi } from './ui.ts';
-
-export let refreshRateEstimate = await updateRefreshRateEstimate();
-
-
-// For fps estimation
-/*
-setInterval(() => {
-  void updateRefreshRateEstimate().then((refreshRate) => {
-    console.log(refreshRate);
-    refreshRateEstimate = refreshRate;
-  });
-}, 1000);
-*/
 
 initializeBallVelocity();
 initializeUi();
