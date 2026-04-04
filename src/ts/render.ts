@@ -1,8 +1,8 @@
-import { drawAsteroidTexture } from './asteroidTextures.ts';
+import { drawAsteroidTexture } from './entities.ts';
 import { gameCanvas } from './canvas.ts';
-import { asteroids } from './asteroids.ts';
+import { asteroids } from './entities.ts';
 import rocketSrc from '../assets/rocket6.png';
-import { pad, padColor, rocket } from './gameState.ts';
+import { pad, padColor, rocket } from './game.ts';
 
 const rocketImage = new Image();
 rocketImage.src = rocketSrc;

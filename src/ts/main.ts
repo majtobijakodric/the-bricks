@@ -1,12 +1,9 @@
 import '../style/style.css';
 import { initializeBackground } from './background.ts';
-import './buttons.ts';
-import { initializeRocketVelocity } from './rocket.ts';
+import { initializeAsteroids, initializeRocketVelocity } from './entities.ts';
 import { gameCanvas, setupCanvasSize } from './canvas.ts';
-import { initializeAsteroids } from './asteroids.ts';
-import { setupEventListeners } from './events.ts';
-import { startGameLoop } from './gameLoop.ts';
-import { resetPadPosition, resetRocketPosition } from './gameState.ts';
+import { resetPadPosition, resetRocketPosition } from './entities.ts';
+import { startGameLoop } from './game.ts';
 import { renderScene } from './render.ts';
 import { initializeUi } from './ui.ts';
 
@@ -22,5 +19,3 @@ if (gameCanvas) {
   renderScene();
   startGameLoop();
 }
-
-setupEventListeners();
