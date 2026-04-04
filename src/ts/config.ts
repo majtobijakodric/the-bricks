@@ -53,18 +53,8 @@ export const modeConfig = {
   },
 } as const;
 
-export const soundConfig = {
-  asteroidHit: 'brick-hit.mp3',
-  bonusHit: 'bonus-hit.mp3',
-  paddleHit: 'paddle-hit.mp3',
-  gameOver: 'game-over.mp3',
-  win: 'win.mp3',
-  buttonClick: 'button-click.mp3',
-};
-
 export const featureConfig = {
   useBonusAsteroids: true,
-  enableSound: true,
   enableDeath: true,
   maxFuel: 5,
   fuelBurnPerSecond: 0.1,

@@ -1,7 +1,6 @@
 import { asteroids, removeAsteroidAtIndex, type Asteroid } from './asteroids.ts';
 import { featureConfig } from './config.ts';
 import { fuel, hasHandledBottomMiss, loseFuel, markBottomMissHandled, pad, canvasHeight, canvasWidth, resetBottomMissState, rocket, setGameOver } from './gameState.ts';
-import { playAsteroidHitSound, playFuelLoseSound } from './sound.ts';
 import { showGameOverModal, updateFuelTankLevel } from './ui.ts';
 
 export function initializeRocketVelocity() {
@@ -47,7 +46,6 @@ export function handleWallCollisions() {
       if (!hasHandledBottomMiss) {
         loseFuel();
         updateFuelTankLevel(fuel / featureConfig.maxFuel);
-        playFuelLoseSound();
         markBottomMissHandled();
       }
 
@@ -144,7 +142,6 @@ export function handleAsteroidCollisions() {
     }
 
     bounceRocketOffAsteroid(asteroid);
-    playAsteroidHitSound();
     removeAsteroidAtIndex(index);
     return;
   }

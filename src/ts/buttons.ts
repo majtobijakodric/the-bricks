@@ -1,24 +1,17 @@
 import Swal from 'sweetalert2';
-import { createElement, Info, Pause, Play, Volume2, VolumeX } from 'lucide';
+import { createElement, Info, Pause, Play } from 'lucide';
 
 import { setRocketSpeed } from './rocket.ts';
-import { aboutButton, muteButton, padSpeedButton, pauseButton, rocketSpeedButton } from './canvas.ts';
+import { aboutButton, padSpeedButton, pauseButton, rocketSpeedButton } from './canvas.ts';
 import { pauseGame, resumeGame } from './gameControls.ts';
 import { isPaused, pad, rocket } from './gameState.ts';
 import { setPadSpeed } from './pad.ts';
-import { prepareAudio, playButtonClickSound, toggleSoundMuted } from './sound.ts';
 
 const swalTheme = {
   background: '#111827',
   color: '#ffffff',
   confirmButtonColor: '#334155',
 };
-
-function renderMuteButtonIcon(button: HTMLButtonElement, muted: boolean) {
-  button.replaceChildren(createElement(muted ? VolumeX : Volume2, { width: 18, height: 18 }));
-  button.title = muted ? 'Unmute sounds' : 'Mute sounds';
-  button.setAttribute('aria-label', button.title);
-}
 
 function renderAboutButtonIcon(button: HTMLButtonElement) {
   button.replaceChildren(createElement(Info, { width: 18, height: 18 }));
@@ -36,9 +29,6 @@ if (aboutButton) {
   renderAboutButtonIcon(aboutButton);
 
   aboutButton.addEventListener('click', async () => {
-    await prepareAudio();
-    playButtonClickSound();
-
     const wasPaused = isPaused;
     pauseGame();
 
@@ -65,9 +55,6 @@ if (pauseButton) {
   renderPauseButtonIcon(button, isPaused);
 
   button.addEventListener('click', async () => {
-    await prepareAudio();
-    playButtonClickSound();
-
     if (isPaused) {
       resumeGame();
       renderPauseButtonIcon(button, false);
@@ -78,25 +65,8 @@ if (pauseButton) {
   });
 }
 
-if (muteButton) {
-  const button = muteButton;
-
-  renderMuteButtonIcon(button, false);
-
-  button.addEventListener('click', async () => {
-    await prepareAudio();
-    playButtonClickSound();
-
-    const muted = toggleSoundMuted();
-    renderMuteButtonIcon(button, muted);
-  });
-}
-
 if (rocketSpeedButton) {
   rocketSpeedButton.addEventListener('click', async () => {
-    await prepareAudio();
-    playButtonClickSound();
-
     Swal.fire({
       title: 'Set Rocket Speed',
       input: 'range',
@@ -119,9 +89,6 @@ if (rocketSpeedButton) {
 
 if (padSpeedButton) {
   padSpeedButton.addEventListener('click', async () => {
-    await prepareAudio();
-    playButtonClickSound();
-
     Swal.fire({
       title: 'Set Pad Speed',
       input: 'range',

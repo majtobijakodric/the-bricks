@@ -1,7 +1,7 @@
 # The Bricks
 
 Space-themed Breakout built with Vite, TypeScript, and Tailwind CSS.
-It is for players who want a fast arcade game with randomized asteroid visuals, sound, and a polished sci-fi presentation.
+It is for players who want a fast arcade game with randomized asteroid visuals and a polished sci-fi presentation.
 
 ## Table of Contents
 
@@ -21,9 +21,8 @@ It is for players who want a fast arcade game with randomized asteroid visuals, 
 - Classic brick-breaking gameplay with paddle, ball, score, and timer.
 - Randomized asteroid bricks with multiple shapes, materials, and textures.
 - Space background system with layered planets and randomized backdrops.
-- Pause, about, and mute controls with icon-based UI.
+- Pause and about controls with icon-based UI.
 - Keyboard paddle controls using the left and right arrow keys.
-- Sound effects for brick hits and game events.
 
 ### Screenshots
 
@@ -38,7 +37,6 @@ It is for players who want a fast arcade game with randomized asteroid visuals, 
 - Styling: Tailwind CSS v4, custom CSS
 - UI/icons: Lucide, SweetAlert2
 - Fonts: Orbitron, JetBrains Mono, Space Nova
-- Audio: native `Audio` API
 - Deployment: GitHub Pages via `gh-pages`
 
 ## How It Is Built
@@ -60,13 +58,12 @@ src/
     asteroidTextures.ts  # Procedural asteroid texture rendering
     render.ts            # Canvas drawing for the scene
     background.ts        # Random space backdrop and planet placement
-    buttons.ts           # Pause, mute, and About button behavior
+    buttons.ts           # Pause and About button behavior
     events.ts            # Keyboard input listeners
-    sound.ts             # Sound playback and mute state
     scoring.ts           # Score tracking and UI updates
     ui.ts                # Score, timer, mode, and pause label updates
     refreshRate.ts       # Refresh-rate estimation utility
-  assets/                # Backgrounds, fonts, audio, and images
+   assets/                # Backgrounds, fonts, and images
   style/style.css        # Global styling and Tailwind import
 index.html               # Game shell and HUD layout
 vite.config.ts           # Vite config and GitHub Pages base path
@@ -115,8 +112,7 @@ npm run preview
 1. Open the app in a browser.
 2. Move the paddle with the left and right arrow keys.
 3. Use Pause to stop and resume the game.
-4. Use Mute to toggle sound.
-5. Use About to view project details.
+4. Use About to view project details.
 
 ## Closing
 
