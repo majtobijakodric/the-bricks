@@ -1,4 +1,4 @@
-import { ASTEROID_AREA_OFFSET_X, ASTEROID_AREA_OFFSET_Y, cell, columns, rows, canvasHeight, canvasWidth, fuel, hasHandledBottomMiss, loseFuel, markBottomMissHandled, pad, rocket, resetBottomMissState, setGameOver } from './game.ts';
+import { ASTEROID_AREA_OFFSET_X, ASTEROID_AREA_OFFSET_Y, cell, columns, rows, canvasHeight, canvasWidth, fuel, hasHandledBottomMiss, isRocketLaunched, loseFuel, markBottomMissHandled, pad, rocket, resetBottomMissState, setGameOver, setRocketLaunched } from './game.ts';
 import { featureConfig } from './config.ts';
 import { showGameOverModal, updateFuelTankLevel } from './ui.ts';
 
@@ -322,22 +322,43 @@ export function drawAsteroidTexture(
 
 export let asteroids: Asteroid[] = [];
 
-export function initializeRocketVelocity() {
-  const launchAngle = (Math.random() * Math.PI) / 2 + Math.PI / 4;
-  const horizontalDirection = Math.random() < 0.5 ? -1 : 1;
+export function resetRocketLaunchState() {
+  setRocketLaunched(false);
+  resetRocketPosition();
+}
 
-  rocket.dx = Math.cos(launchAngle) * rocket.speed * horizontalDirection;
+export function launchRocketFromPad() {
+  if (isRocketLaunched) {
+    return;
+  }
+
+  setRocketLaunched(true);
+
+  const launchAngle = (Math.random() * Math.PI) / 2 + Math.PI / 4;
+  rocket.x = pad.x + pad.width / 2;
+  rocket.y = pad.y - rocket.radius - 5;
+  rocket.dx = Math.cos(launchAngle) * rocket.speed;
   rocket.dy = -Math.sin(launchAngle) * rocket.speed;
 }
 
 export function setRocketSpeed(speed: number) {
   rocket.speed = speed;
+  if (!isRocketLaunched) {
+    rocket.dx = 0;
+    rocket.dy = -rocket.speed;
+    return;
+  }
+
   const angle = Math.atan2(rocket.dy, rocket.dx);
   rocket.dx = Math.cos(angle) * rocket.speed;
   rocket.dy = Math.sin(angle) * rocket.speed;
 }
 
 export function updateRocketPosition() {
+  if (!isRocketLaunched) {
+    return;
+  }
+
   rocket.x += rocket.dx;
   rocket.y += rocket.dy;
 }
@@ -362,6 +383,8 @@ export function resetPadPosition() {
 export function resetRocketPosition() {
   rocket.x = pad.x + pad.width / 2;
   rocket.y = pad.y - rocket.radius - 5;
+  rocket.dx = 0;
+  rocket.dy = -rocket.speed;
 }
 
 export function initializeAsteroids() {
@@ -395,6 +418,10 @@ export function removeAsteroidAtIndex(index: number) {
 }
 
 export function handleWallCollisions() {
+  if (!isRocketLaunched) {
+    return;
+  }
+
   if (rocket.x + rocket.radius >= canvasWidth || rocket.x - rocket.radius <= 0) {
     rocket.dx *= -1;
     rocket.x = Math.max(rocket.radius, Math.min(canvasWidth - rocket.radius, rocket.x));
@@ -439,6 +466,10 @@ export function handleWallCollisions() {
 }
 
 export function handlePadCollision() {
+  if (!isRocketLaunched) {
+    return;
+  }
+
   const hitsPadHorizontally = rocket.x + rocket.radius >= pad.x && rocket.x - rocket.radius <= pad.width + pad.x;
   const hitsPadVertically = rocket.y + rocket.radius >= pad.y && rocket.y - rocket.radius <= pad.y + pad.height;
 
@@ -500,6 +531,10 @@ function bounceRocketOffAsteroid(asteroid: Asteroid) {
 }
 
 export function handleAsteroidCollisions() {
+  if (!isRocketLaunched) {
+    return;
+  }
+
   for (let index = 0; index < asteroids.length; index += 1) {
     const asteroid = asteroids[index];
 

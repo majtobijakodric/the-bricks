@@ -5,9 +5,9 @@ import {
   handlePadCollision,
   handleWallCollisions,
   initializeAsteroids,
-  initializeRocketVelocity,
   movePadBy,
   resetPadPosition,
+  resetRocketLaunchState,
   resetRocketPosition,
   updateRocketPosition,
 } from './entities.ts';
@@ -27,6 +27,7 @@ export const ASTEROID_AREA_OFFSET_Y = asteroidLayoutConfig.offsetY;
 
 export let isPaused = false;
 export let isGameOver = false;
+export let isRocketLaunched = false;
 export let fuel = featureConfig.maxFuel;
 export let hasHandledBottomMiss = false;
 
@@ -88,6 +89,10 @@ export function resetBottomMissState() {
   hasHandledBottomMiss = false;
 }
 
+export function setRocketLaunched(value: boolean) {
+  isRocketLaunched = value;
+}
+
 export function markBottomMissHandled() {
   hasHandledBottomMiss = true;
 }
@@ -105,15 +110,15 @@ export function resumeGame() {
 export function restartGame() {
   setGameOver(false);
   setPaused(false);
+  setRocketLaunched(false);
   input.left = false;
   input.right = false;
 
   resetFuel();
   resetBottomMissState();
   resetPadPosition();
-  resetRocketPosition();
   initializeAsteroids();
-  initializeRocketVelocity();
+  resetRocketLaunchState();
   resetGameOverModalState();
   updateFuelTankLevel(1);
 
@@ -138,6 +143,24 @@ function animateFrame(timestamp: number) {
   if (isGameOver) {
     lastActiveTimestamp = null;
     renderScene();
+    return;
+  }
+
+  if (!isRocketLaunched) {
+    lastActiveTimestamp = timestamp;
+
+    if (input.left) {
+      movePadBy(-pad.speed);
+    }
+
+    if (input.right) {
+      movePadBy(pad.speed);
+    }
+
+    resetRocketPosition();
+    updateFuelTankLevel(fuel / featureConfig.maxFuel);
+    renderScene();
+    requestAnimationFrame(animateFrame);
     return;
   }
 

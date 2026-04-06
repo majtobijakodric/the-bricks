@@ -3,8 +3,8 @@ import { createElement, Info, Pause, Play } from 'lucide';
 
 import { aboutButton, padSpeedButton, pauseButton, rocketSpeedButton } from './canvas.ts';
 import { modeConfig } from './config.ts';
-import { movePadBy, setPadSpeed, setRocketSpeed } from './entities.ts';
-import { input, isGameOver, isPaused, pad, pauseGame, restartGame, resumeGame, rocket } from './game.ts';
+import { launchRocketFromPad, movePadBy, setPadSpeed, setRocketSpeed } from './entities.ts';
+import { input, isGameOver, isPaused, pad, pauseGame, restartGame, resumeGame, rocket, isRocketLaunched } from './game.ts';
 import { renderScene } from './render.ts';
 
 const swalTheme = {
@@ -65,6 +65,17 @@ function bindKeyboardListeners() {
     }
 
     const step = pad.speed;
+
+    if (event.code === 'Space') {
+      event.preventDefault();
+
+      if (!isRocketLaunched) {
+        launchRocketFromPad();
+        renderScene();
+      }
+
+      return;
+    }
 
     switch (event.key) {
       case 'ArrowLeft': {
