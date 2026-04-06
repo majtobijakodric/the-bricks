@@ -1,7 +1,8 @@
-import { drawAsteroidTexture } from './entities.ts';
+import { drawAsteroidSprite } from './entities.ts';
 import { gameCanvas } from './canvas.ts';
 import { asteroids } from './entities.ts';
 import rocketSrc from '../assets/rockets/rocketBlue.png';
+import { rocketSpriteConfig } from './config.ts';
 import { pad, padColor, rocket } from './game.ts';
 
 const rocketImage = new Image();
@@ -28,7 +29,7 @@ export function renderScene() {
   ctx.fillRect(pad.x, pad.y, pad.width, pad.height);
 
   // Rocket
-  const size = rocket.radius * 5;
+  const size = rocket.radius * rocketSpriteConfig.sizeMultiplier;
   const angle = Math.atan2(rocket.dy, rocket.dx) + rocketRotationOffset;
 
   ctx.save();
@@ -54,11 +55,9 @@ export function renderScene() {
 
 function renderAsteroids(ctx: CanvasRenderingContext2D) {
   asteroids.forEach((asteroid) => {
-    drawAsteroidTexture(
+    drawAsteroidSprite(
       ctx,
-      asteroid.shapeIndex,
-      asteroid.material,
-      asteroid.textureVariant,
+      asteroid.sprite,
       asteroid.x,
       asteroid.y,
       asteroid.width,

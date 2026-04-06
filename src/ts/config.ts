@@ -60,3 +60,16 @@ export const featureConfig = {
   fuelBurnPerSecond: 0.1,
   deathBoundaryOffset: 80,
 };
+
+export const rockSpriteConfig = {
+  weights: {
+    normal: 70,
+    gray: 18,
+    blue: 8,
+    red: 4,
+  },
+} as const;
+
+export const rocketSpriteConfig = {
+  sizeMultiplier: 6,
+} as const;
