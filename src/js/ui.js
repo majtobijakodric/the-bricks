@@ -1,40 +1,10 @@
 import Swal from 'sweetalert2'
 import { createElement, Info, Pause, Play } from 'lucide'
-
-import {
-  activateAbility,
-  getAbilityIconSource,
-  getAbilityState,
-  subscribeToAbilityState,
-} from './abilities.js'
-import {
-  abilityMessage,
-  aboutButton,
-  blueAbilityButton,
-  blueAbilityCount,
-  blueAbilityIcon,
-  modeButton,
-  padSpeedButton,
-  pauseButton,
-  redAbilityButton,
-  redAbilityCount,
-  redAbilityIcon,
-  rocketSpeedButton,
-} from './canvas.js'
+import { activateAbility, getAbilityIconSource, getAbilityState, subscribeToAbilityState } from './abilities.js'
+import { abilityMessage, aboutButton, blueAbilityButton, blueAbilityCount, blueAbilityIcon, modeButton, padSpeedButton, pauseButton, redAbilityButton, redAbilityCount, redAbilityIcon, rocketSpeedButton } from './canvas.js'
 import { featureConfig, modeConfig } from './config.js'
 import { launchRocketFromPad, movePadBy, setPadSpeed, setRocketSpeed } from './entities.js'
-import {
-  fuel,
-  input,
-  isGameOver,
-  isPaused,
-  isRocketLaunched,
-  pad,
-  pauseGame,
-  restartGame,
-  resumeGame,
-  rocket,
-} from './game.js'
+import { fuel, input, isGameOver, isPaused, isRocketLaunched, pad, pauseGame, restartGame, resumeGame, rocket } from './game.js'
 import { renderScene } from './render.js'
 
 const swalTheme = {

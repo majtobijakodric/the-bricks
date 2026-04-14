@@ -1,17 +1,7 @@
 import { asteroidLayoutConfig, canvasConfig, featureConfig } from './config.js'
 import { gameCanvas } from './canvas.js'
 import { resetAbilitySystem } from './abilities.js'
-import {
-  handleAsteroidCollisions,
-  handlePadCollision,
-  handleWallCollisions,
-  initializeAsteroids,
-  movePadBy,
-  resetPadPosition,
-  resetRocketLaunchState,
-  resetRocketPosition,
-  updateRocketPosition,
-} from './entities.js'
+import { handleAsteroidCollisions, handlePadCollision, handleWallCollisions, initializeAsteroids, movePadBy, resetPadPosition, resetRocketLaunchState, resetRocketPosition, updateRocketPosition } from './entities.js'
 import { renderScene } from './render.js'
 import { resetGameOverModalState, showGameOverModal, updateFuelTankLevel } from './ui.js'
 

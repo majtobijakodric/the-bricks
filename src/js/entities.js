@@ -24,28 +24,7 @@ import rockRed5Url from '../assets/rocks/red/rock_5.png'
 import rockRed6Url from '../assets/rocks/red/rock_6.png'
 
 import { featureConfig, rockSpriteConfig } from './config.js'
-import {
-  ASTEROID_AREA_OFFSET_X,
-  ASTEROID_AREA_OFFSET_Y,
-  addFuel,
-  canvasHeight,
-  canvasWidth,
-  cell,
-  columns,
-  fuel,
-  hasHandledBottomMiss,
-  isRocketLaunched,
-  loseFuel,
-  markBottomMissHandled,
-  pad,
-  resetBottomMissState,
-  rocket,
-  rows,
-  setBasePadSpeed,
-  setBaseRocketSpeed,
-  setGameOver,
-  setRocketLaunched,
-} from './game.js'
+import { ASTEROID_AREA_OFFSET_X, ASTEROID_AREA_OFFSET_Y, addFuel, canvasHeight, canvasWidth, cell, columns, fuel, hasHandledBottomMiss, isRocketLaunched, loseFuel, markBottomMissHandled, pad, resetBottomMissState, rocket, rows, setBasePadSpeed, setBaseRocketSpeed, setGameOver, setRocketLaunched } from './game.js'
 import { chargeAbility } from './abilities.js'
 import { showGameOverModal, updateFuelTankLevel } from './ui.js'
 
