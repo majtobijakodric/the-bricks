@@ -1,89 +1,84 @@
 # The Bricks
 
-Space-themed Breakout built with Vite, TypeScript, and Tailwind CSS.
-It is for players who want a fast arcade game with randomized asteroid visuals and a polished sci-fi presentation.
+A space-themed brick breaker where you pilot a rocket through asteroid fields. Destroy asteroids, collect abilities, and manage your fuel reserves to survive.
 
-## Table of Contents
+## Features
 
-- Features
-- Screenshots
-- Tech Stack
-- Project Structure
-- Notes
-- How to Use
-- Author
-- License
+- **Asteroid Field Gameplay** - Blast through procedurally-arranged asteroids with a rocket that bounces and ricochets
+- **Fuel System** - Your fuel depletes over time and when the rocket escapes into space; gray asteroids restore fuel
+- **Ability System** - Blue and red asteroids charge abilities that trigger random effects (pad speed boosts, fuel pauses, rocket stabilization)
+- **Difficulty Modes** - Easy, Medium, Hard, and Experimental presets control rocket/pad speed and fuel drain rate
+- **Sprite-Based Visuals** - Asteroids rendered from pixel art sprite sheets with weighted color distribution
+- **Space Aesthetic** - Custom fonts (Orbitron, Oxanium, JetBrains Mono) and space background
 
-## Core Story
+## Tech Stack
 
-### Features
+- **Build**: Vite
+- **Styling**: Tailwind CSS v4, custom CSS
+- **UI**: Lucide icons, SweetAlert2
+- **Fonts**: Orbitron, Oxanium, JetBrains Mono
+- **Deployment**: GitHub Pages
 
-- Classic brick-breaking gameplay with paddle, ball, score, and timer.
-- Randomized asteroid bricks with multiple shapes, materials, and textures.
-- Space background system with layered planets and randomized backdrops.
-- Pause and about controls with icon-based UI.
-- Keyboard paddle controls using the left and right arrow keys.
+## Project Structure
 
-### Screenshots
-
-- Overview: `assets/screenshots/overview.png`
-- In action: `assets/screenshots/in-action.png`
-- Result state: `assets/screenshots/result-state.png`
-- Settings/modal: `assets/screenshots/about-modal.png`
-
-### Tech Stack
-
-- Frontend: TypeScript, Vite
-- Styling: Tailwind CSS v4, custom CSS
-- UI/icons: Lucide, SweetAlert2
-- Fonts: Orbitron, JetBrains Mono, Space Nova
-- Deployment: GitHub Pages via `gh-pages`
-
-## How It Is Built
-
-### Project Structure
-
-```text
+```
 src/
-  ts/
-    main.ts              # App bootstrap and startup flow
-    canvas.ts            # Canvas and button element wiring
-    gameLoop.ts          # Animation loop and per-frame updates
-    gameState.ts         # Shared game state and reset helpers
-    config.ts            # Game settings, colors, modes, and feature flags
-    ball.ts              # Ball movement and collision logic
-    pad.ts               # Paddle movement helpers
-    bricks.ts            # Brick generation and removal
-    asteroidShapes.ts    # Base shapes used for asteroid bricks
-    asteroidTextures.ts  # Procedural asteroid texture rendering
-    render.ts            # Canvas drawing for the scene
-    buttons.ts           # Pause and About button behavior
-    events.ts            # Keyboard input listeners
-    scoring.ts           # Score tracking and UI updates
-    ui.ts                # Score, timer, mode, and pause label updates
-    refreshRate.ts       # Refresh-rate estimation utility
-   assets/                # Backgrounds, fonts, and images
-  style/style.css        # Global styling and Tailwind import
-index.html               # Game shell and HUD layout
-vite.config.ts           # Vite config and GitHub Pages base path
-package.json             # Scripts and dependencies
+  js/
+    main.js         # App bootstrap
+    game.js         # Game state, loop, and effect system
+    entities.js     # Rocket, pad, asteroid entities and collisions
+    abilities.js    # Ability charging and effect application
+    config.js       # Game settings, modes, and feature flags
+    canvas.js       # Canvas and button element wiring
+    ui.js           # HUD, modals, and UI updates
+    render.js       # Canvas drawing
+  assets/
+    background/     # Space background image
+    rocks/          # Asteroid sprite sheets (blue, gray, normal, red)
+    rockets/        # Rocket sprites
+    sound/          # Audio assets
+  style/
+    style.css       # Global styling and Tailwind
+index.html          # Game shell and HUD layout
+vite.config.js      # Vite config and GitHub Pages base path
+package.json        # Scripts and dependencies
 ```
 
-### Notes
+## Controls
 
-- The game boots from `src/ts/main.ts`, which initializes the bricks, UI, and loop.
-- Brick visuals are generated procedurally from shape data and seeded textures, so the board feels varied each run.
-- The game uses a static space background image defined in `src/style/style.css`.
-- The pause button clears held input so the paddle does not keep moving after resume.
-- The repository is configured for GitHub Pages with the `/the-bricks/` base path in `vite.config.ts`.
-- Difficulty presets exist in `src/ts/config.ts`, but the current UI only displays the default mode.
+| Input | Action |
+|-------|--------|
+| Left / Right Arrow | Move pad |
+| Space | Launch rocket (before launch) |
+| Blue ability button | Activate blue ability |
+| Red ability button | Activate red ability |
+| Pause button | Pause / resume game |
 
-### Textures
- [Asteroids](https://dustdfg.itch.io/pixel-art-top-down-rocks-pack?download)
- <br>
- [Pixel space](https://deep-fold.itch.io/space-background-generator)
+## Ability Effects
 
-### Clone / Install
+**Red Ability (offense/defense)**:
+- Pause fuel drain for 5 seconds
+- Restore 1 fuel unit
+- Expand pad width for 8 seconds
+- Slow fuel drain for 8 seconds
+
+**Blue Ability (mobility/chaos)**:
+- Boost pad speed for 8 seconds
+- Stabilize rocket (reduce speed) for 8 seconds
+- Slow pad speed for 8 seconds
+- Overdrive rocket for 8 seconds
+- Spike fuel drain for 5 seconds
+
+## Asteroids
+
+| Type | Chance | Effect |
+|------|--------|--------|
+| Normal | 70% | Destroys asteroid |
+| Gray | 18% | Destroys asteroid, restores fuel |
+| Blue | 8% | Destroys asteroid, charges blue ability |
+| Red | 4% | Destroys asteroid, charges red ability |
+
+## Setup
 
 ```bash
 git clone https://github.com/majtobijakodric/the-bricks.git
@@ -91,32 +86,31 @@ cd the-bricks
 npm install
 ```
 
-### Run Locally
+## Development
 
 ```bash
 npm run dev
 ```
 
-### Build For Production
+## Production
 
 ```bash
 npm run build
-```
-
-### Preview The Production Build
-
-```bash
 npm run preview
 ```
 
-### Usage
+## Deploy
 
-1. Open the app in a browser.
-2. Move the paddle with the left and right arrow keys.
-3. Use Pause to stop and resume the game.
-4. Use About to view project details.
+```bash
+npm run deploy
+```
 
-## Closing
+## Credits
 
-- Author: Maj Tobija Kodrič
-- License: Not specified
+Asteroid sprites: [Pixel Art Top Down Rocks Pack](https://dustdfg.itch.io/pixel-art-top-down-rocks-pack) by dustdfg
+
+Space background: [Space Background Generator](https://deep-fold.itch.io/space-background-generator) by deep-fold
+
+## License
+
+Not specified

@@ -1,7 +1,7 @@
 import blueAbilityIconSrc from '../assets/rocks/blue/rock_2.png'
 import redAbilityIconSrc from '../assets/rocks/red/rock_2.png'
 
-import { addFuel, applyFuelDrainMultiplier, applyFuelPause, applyPadSpeedMultiplier, applyPadWidthMultiplier, applyRocketSpeedMultiplier, clearGameplayEffects } from './game.js'
+import { addFuel, applyFuelDrainMultiplier, applyFuelPause, applyPadSpeedMultiplier, applyRocketSpeedMultiplier, clearGameplayEffects } from './game.js'
 
 const PULSE_DURATION_MS = 900
 const MESSAGE_DURATION_MS = 3200
@@ -58,12 +58,6 @@ const redEffects = [
     message: 'Fuel reserves restored.',
     apply: () => {
       addFuel(1)
-    },
-  },
-  {
-    message: 'Pad expanded for 8 seconds.',
-    apply: () => {
-      applyPadWidthMultiplier(1.45, 8000)
     },
   },
   {

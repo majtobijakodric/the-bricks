@@ -41,18 +41,15 @@ export const rocket = {
 
 let basePadSpeed = pad.speed
 let baseRocketSpeed = rocket.speed
-let basePadWidth = pad.width
 let fuelPauseActive = false
 let fuelDrainMultiplier = 1
 let padSpeedMultiplier = 1
 let rocketSpeedMultiplier = 1
-let padWidthMultiplier = 1
 
 let fuelPauseTimeoutId = null
 let fuelDrainTimeoutId = null
 let padSpeedTimeoutId = null
 let rocketSpeedTimeoutId = null
-let padWidthTimeoutId = null
 let gameLoopActive = false
 
 export const input = {
@@ -136,11 +133,6 @@ function syncPadSpeed() {
   pad.speed = Math.max(1, basePadSpeed * padSpeedMultiplier)
 }
 
-function syncPadWidth() {
-  pad.width = Math.max(36, basePadWidth * padWidthMultiplier)
-  pad.x = Math.max(0, Math.min(canvasWidth - pad.width, pad.x))
-}
-
 function syncRocketSpeed() {
   rocket.speed = Math.max(1, baseRocketSpeed * rocketSpeedMultiplier)
   syncRocketVelocityToSpeed()
@@ -175,17 +167,6 @@ export function applyPadSpeedMultiplier(multiplier, durationMs) {
   }, durationMs)
 }
 
-export function applyPadWidthMultiplier(multiplier, durationMs) {
-  padWidthMultiplier = multiplier
-  syncPadWidth()
-  clearEffectTimer(padWidthTimeoutId)
-  padWidthTimeoutId = setTimeout(() => {
-    padWidthMultiplier = 1
-    syncPadWidth()
-    padWidthTimeoutId = null
-  }, durationMs)
-}
-
 export function applyRocketSpeedMultiplier(multiplier, durationMs) {
   rocketSpeedMultiplier = multiplier
   syncRocketSpeed()
@@ -202,22 +183,18 @@ export function clearGameplayEffects() {
   fuelDrainMultiplier = 1
   padSpeedMultiplier = 1
   rocketSpeedMultiplier = 1
-  padWidthMultiplier = 1
 
   clearEffectTimer(fuelPauseTimeoutId)
   clearEffectTimer(fuelDrainTimeoutId)
   clearEffectTimer(padSpeedTimeoutId)
   clearEffectTimer(rocketSpeedTimeoutId)
-  clearEffectTimer(padWidthTimeoutId)
 
   fuelPauseTimeoutId = null
   fuelDrainTimeoutId = null
   padSpeedTimeoutId = null
   rocketSpeedTimeoutId = null
-  padWidthTimeoutId = null
 
   syncPadSpeed()
-  syncPadWidth()
   syncRocketSpeed()
 }
 

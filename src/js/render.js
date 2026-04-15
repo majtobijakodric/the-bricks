@@ -1,12 +1,16 @@
 import rocketSrc from '../assets/rockets/rocketBlue.png'
+import padSrc from '../assets/rocks/blue/rock_1.png'
 
 import { gameCanvas } from './canvas.js'
 import { rocketSpriteConfig } from './config.js'
 import { asteroids, drawAsteroidSprite } from './entities.js'
-import { pad, padColor, rocket } from './game.js'
+import { pad, rocket } from './game.js'
 
 const rocketImage = new Image()
 rocketImage.src = rocketSrc
+
+const padImage = new Image()
+padImage.src = padSrc
 
 // The sprite points upward by default, then gets flipped 180 degrees.
 const rocketRotationOffset = Math.PI / 2
@@ -24,8 +28,12 @@ export function renderScene() {
   ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height)
   renderAsteroids(ctx)
 
-  ctx.fillStyle = padColor
-  ctx.fillRect(pad.x, pad.y, pad.width, pad.height)
+  if (padImage.complete && padImage.naturalWidth > 0) {
+    ctx.drawImage(padImage, pad.x, pad.y, pad.width, pad.height)
+  } else {
+    ctx.fillStyle = 'blue'
+    ctx.fillRect(pad.x, pad.y, pad.width, pad.height)
+  }
 
   const size = rocket.radius * rocketSpriteConfig.sizeMultiplier
   const angle = Math.atan2(rocket.dy, rocket.dx) + rocketRotationOffset
