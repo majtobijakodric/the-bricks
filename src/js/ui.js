@@ -172,6 +172,15 @@ function renderPauseButtonIcon(button, paused) {
   button.setAttribute('aria-label', button.title)
 }
 
+export function syncCurrentScoreButton() {
+  if (!currentScoreButton) {
+    return
+  }
+
+  currentScoreButton.textContent = `Score: ${currentScore}`
+  currentScoreButton.setAttribute('aria-label', `Current score ${currentScore}`)
+}
+
 export function syncPauseButtonUi(paused = isPaused) {
   if (!pauseButton) {
     return
@@ -304,6 +313,7 @@ function bindKeyboardListeners() {
 export function initializeUi() {
   applyMode(modeConfig.defaultMode)
   updatePauseButtonText(false)
+  syncCurrentScoreButton()
   syncPauseButtonUi(false)
   updateFuelTankLevel(1)
   updateAbilityUi()

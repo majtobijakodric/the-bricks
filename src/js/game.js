@@ -3,7 +3,7 @@ import { gameCanvas } from './canvas.js'
 import { resetAbilitySystem } from './abilities.js'
 import { handleAsteroidCollisions, handlePadCollision, handleWallCollisions, initializeAsteroids, movePadBy, resetPadPosition, resetRocketLaunchState, resetRocketPosition, updateRocketPosition } from './entities.js'
 import { renderScene } from './render.js'
-import { resetGameOverModalState, showGameOverModal, syncPauseButtonUi, updateFuelTankLevel } from './ui.js'
+import { resetGameOverModalState, showGameOverModal, syncCurrentScoreButton, syncPauseButtonUi, updateFuelTankLevel } from './ui.js'
 
 export let canvasHeight = canvasConfig.height
 export let canvasWidth = canvasConfig.width
@@ -25,7 +25,7 @@ export let hasHandledBottomMiss = false
 
 export const pad = {
   x: canvasWidth / 2 - 25,
-  y: canvasHeight - 50,
+  y: canvasHeight - 30,
   width: 100,
   height: 20,
   speed: 4,
@@ -99,10 +99,12 @@ export function resetFuel() {
 
 export function addScore(amount) {
   currentScore += amount
+  syncCurrentScoreButton()
 }
 
 export function resetScore() {
   currentScore = 0
+  syncCurrentScoreButton()
 }
 
 export function resetBottomMissState() {

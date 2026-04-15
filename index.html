@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="app" class="min-h-screen px-4 py-6">
-      <div class="mx-auto flex w-fit flex-col items-center gap-4">
+      <div class="game-shell mx-auto flex w-full flex-col items-center gap-4">
         <div class="w-full rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 shadow-xl">
-          <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex flex-wrap items-center justify-start gap-2 lg:gap-4">
-              <div class="ability-menu flex items-center gap-2 self-stretch">
+          <div class="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex min-w-0 flex-1 flex-wrap items-center justify-start gap-2 lg:gap-4">
+              <div class="ability-menu flex min-w-0 flex-wrap items-center gap-2 self-stretch">
                 <button id="redAbilityButton" type="button" class="ability-button" aria-label="Activate red rock ability">
                   <img id="redAbilityIcon" class="ability-icon" alt="Red rock ability icon" />
                   <span id="redAbilityCount" class="ability-count" aria-hidden="true"></span>
@@ -23,13 +23,12 @@
                   <span id="blueAbilityCount" class="ability-count" aria-hidden="true"></span>
                 </button>
 
+                <button id="currentScoreButton" type="button"
+                  class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+                </button>
+
                 <p id="abilityMessage" class="ability-message" aria-live="polite"></p>
                 </div>
-
-              <button id="currentScoreButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-                Current Score
-              </button>
 
               <button id="rocketSpeedButton" type="button"
                 class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
@@ -42,7 +41,7 @@
               </button>
             </div>
 
-            <div class="flex flex-wrap items-center justify-end gap-2">
+            <div class="flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-2">
               <button id="modeButton" type="button"
                 class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
                 Mode
