@@ -4,137 +4,15 @@ import { abilityMessage, aboutButton, blueAbilityButton, blueAbilityCount, blueA
 import { featureConfig, modeConfig } from './config.js'
 import { launchRocketFromPad, movePadBy, setPadSpeed, setRocketSpeed } from './entities.js'
 import { currentScore, fuel, input, isGameOver, isPaused, isRocketLaunched, pad, pauseGame, restartGame, resumeGame, rocket } from './game.js'
+import { renderScoreHistoryMarkup, saveScore } from './score-history.js'
 import { showAboutSweet, showGameOverSweet, showHowToPlaySweet, showModeSweet, showPadSpeedSweet, showRocketSpeedSweet, showScoreSweet, showWinSweet } from './sweet.js'
 import { renderScene } from './render.js'
 
 const fuelTankFill = document.querySelector('#fuelTankFill')
-const scoreHistoryStorageKey = 'the-bricks-score-history'
 
 let endSweetShown = false
 let listenersBound = false
 let currentMode = modeConfig.defaultMode
-
-function parseStoredScoreLine(line) {
-  const parts = line.split('|')
-  const score = Number(parts[0])
-
-  if (!Number.isFinite(score)) {
-    return null
-  }
-
-  const timestamp = Number(parts[1])
-
-  return {
-    score,
-    timestamp: Number.isFinite(timestamp) ? timestamp : null,
-    didFinish: parts[2] === '1',
-    mode: parts[3] || null,
-  }
-}
-
-function encodeStoredScore(score, didFinish, mode) {
-  let finishFlag = '0'
-
-  if (didFinish) {
-    finishFlag = '1'
-  }
-
-  return [score, Date.now(), finishFlag, mode].join('|')
-}
-
-function getStoredScores() {
-  const rawScores = localStorage.getItem(scoreHistoryStorageKey)
-
-  if (!rawScores) {
-    return []
-  }
-
-  const lines = rawScores.split('\n')
-  const scores = []
-
-  for (let index = 0; index < lines.length; index += 1) {
-    const parsedScore = parseStoredScoreLine(lines[index])
-
-    if (parsedScore) {
-      scores.push(parsedScore)
-    }
-  }
-
-  return scores
-}
-
-function saveScore(score, didFinish = false) {
-  const encodedScore = encodeStoredScore(score, didFinish, currentMode)
-  const previousScores = localStorage.getItem(scoreHistoryStorageKey)
-  const nextScores = previousScores ? `${encodedScore}\n${previousScores}` : encodedScore
-  localStorage.setItem(scoreHistoryStorageKey, nextScores)
-}
-
-function formatModeLabel(mode) {
-  if (!mode) {
-    return 'Unknown'
-  }
-
-  return mode.charAt(0).toUpperCase() + mode.slice(1)
-}
-
-function formatRunTimestamp(timestamp) {
-  if (!timestamp) {
-    return 'Unknown date'
-  }
-
-  const date = new Date(timestamp)
-
-  if (Number.isNaN(date.getTime())) {
-    return 'Unknown date'
-  }
-
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-  const hours = String(date.getHours()).padStart(2, '0')
-  const minutes = String(date.getMinutes()).padStart(2, '0')
-
-  return `${hours}:${minutes} ${day}.${month}.${year}`
-}
-
-function renderScoreHistoryMarkup() {
-  const previousScores = getStoredScores()
-
-  if (previousScores.length === 0) {
-    return `
-      <div class="score-history-panel text-left text-sm leading-6">
-        <p class="mb-3">Current score: <strong>${currentScore}</strong></p>
-        <p>You haven't played this game yet.</p>
-      </div>
-    `
-  }
-
-  const scoreItems = previousScores
-    .map((run, index) => `
-      <li class="score-history-item">
-        <div class="score-history-copy">
-          <span>Run ${index + 1}</span>
-          <div class="score-history-meta">
-            <span class="score-history-date">${formatRunTimestamp(run.timestamp)}</span>
-            <span class="score-history-status${run.didFinish ? ' is-finished' : ''}">${run.didFinish ? 'Finished' : 'Did not finish'}</span>
-            <span class="score-history-mode">${formatModeLabel(run.mode)}</span>
-          </div>
-        </div>
-        <strong>${run.score}</strong>
-      </li>
-    `)
-    .join('')
-
-  return `
-    <div class="score-history-panel text-left text-sm leading-6">
-      <p class="mb-3">Current score: <strong>${currentScore}</strong></p>
-      <div class="score-history-list" role="region" aria-label="Previous scores">
-        <ol>${scoreItems}</ol>
-      </div>
-    </div>
-  `
-}
 
 async function runPausedSweet(openSweet) {
   const wasPaused = isPaused
@@ -152,7 +30,7 @@ async function runPausedSweet(openSweet) {
 }
 
 async function openScoreMenu() {
-  await runPausedSweet(() => showScoreSweet(renderScoreHistoryMarkup()))
+  await runPausedSweet(() => showScoreSweet(renderScoreHistoryMarkup(currentScore)))
 }
 
 function updateExperimentalControls() {
@@ -430,7 +308,7 @@ export async function openGameOverSweet() {
   }
 
   endSweetShown = true
-  saveScore(currentScore, false)
+  saveScore(currentScore, false, currentMode)
 
   await showGameOverSweet()
 
@@ -443,7 +321,7 @@ export async function openWinSweet() {
   } 
 
   endSweetShown = true
-  saveScore(currentScore, true)
+  saveScore(currentScore, true, currentMode)
 
   await showWinSweet()
 
