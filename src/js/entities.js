@@ -1,27 +1,18 @@
 import rockBlue1Url from '../assets/rocks/blue/rock_1.png'
 import rockBlue2Url from '../assets/rocks/blue/rock_2.png'
 import rockBlue3Url from '../assets/rocks/blue/rock_3.png'
-import rockBlue4Url from '../assets/rocks/blue/rock_4.png'
-import rockBlue5Url from '../assets/rocks/blue/rock_5.png'
-import rockBlue6Url from '../assets/rocks/blue/rock_6.png'
+
 import rockGray1Url from '../assets/rocks/gray/rock_1.png'
 import rockGray2Url from '../assets/rocks/gray/rock_2.png'
 import rockGray3Url from '../assets/rocks/gray/rock_3.png'
-import rockGray4Url from '../assets/rocks/gray/rock_4.png'
-import rockGray5Url from '../assets/rocks/gray/rock_5.png'
-import rockGray6Url from '../assets/rocks/gray/rock_6.png'
+
 import rockNormal1Url from '../assets/rocks/normal/rock_1.png'
 import rockNormal2Url from '../assets/rocks/normal/rock_2.png'
 import rockNormal3Url from '../assets/rocks/normal/rock_3.png'
-import rockNormal4Url from '../assets/rocks/normal/rock_4.png'
-import rockNormal5Url from '../assets/rocks/normal/rock_5.png'
-import rockNormal6Url from '../assets/rocks/normal/rock_6.png'
+
 import rockRed1Url from '../assets/rocks/red/rock_1.png'
 import rockRed2Url from '../assets/rocks/red/rock_2.png'
 import rockRed3Url from '../assets/rocks/red/rock_3.png'
-import rockRed4Url from '../assets/rocks/red/rock_4.png'
-import rockRed5Url from '../assets/rocks/red/rock_5.png'
-import rockRed6Url from '../assets/rocks/red/rock_6.png'
 
 import { featureConfig, rockSpriteConfig } from './config.js'
 import { ASTEROID_AREA_OFFSET_X, ASTEROID_AREA_OFFSET_Y, addFuel, addScore, canvasHeight, canvasWidth, cell, columns, fuel, hasHandledBottomMiss, isRocketLaunched, loseFuel, markBottomMissHandled, pad, resetBottomMissState, rocket, rows, setBasePadSpeed, setBaseRocketSpeed, setGameOver, setRocketLaunched } from './game.js'
@@ -29,13 +20,11 @@ import { chargeAbility } from './abilities.js'
 import { openGameOverSweet, openWinSweet, updateFuelTankLevel } from './ui.js'
 
 const rockSpriteSources = {
-  normal: [rockNormal1Url, rockNormal2Url, rockNormal3Url, rockNormal4Url, rockNormal5Url, rockNormal6Url],
-  gray: [rockGray1Url, rockGray2Url, rockGray3Url, rockGray4Url, rockGray5Url, rockGray6Url],
-  blue: [rockBlue1Url, rockBlue2Url, rockBlue3Url, rockBlue4Url, rockBlue5Url, rockBlue6Url],
-  red: [rockRed1Url, rockRed2Url, rockRed3Url, rockRed4Url, rockRed5Url, rockRed6Url],
+  normal: [rockNormal1Url, rockNormal2Url, rockNormal3Url],
+  gray: [rockGray1Url, rockGray2Url, rockGray3Url],
+  blue: [rockBlue1Url, rockBlue2Url, rockBlue3Url],
+  red: [rockRed1Url, rockRed2Url, rockRed3Url],
 }
-
-const spriteCache = new Map()
 
 const asteroidScoreValues = {
   normal: 1,
@@ -45,15 +34,8 @@ const asteroidScoreValues = {
 }
 
 function loadSprite(src) {
-  const cached = spriteCache.get(src)
-
-  if (cached) {
-    return cached
-  }
-
   const sprite = new Image()
   sprite.src = src
-  spriteCache.set(src, sprite)
   return sprite
 }
 
@@ -93,7 +75,6 @@ function pickRandomAsteroid(color) {
 
 export function drawAsteroidSprite(ctx, sprite, x, y, width, height) {
   ctx.save()
-  ctx.imageSmoothingEnabled = false
   ctx.drawImage(sprite, Math.round(x), Math.round(y), Math.round(width), Math.round(height))
   ctx.restore()
 }
