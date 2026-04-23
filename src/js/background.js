@@ -16,7 +16,10 @@ export function setupPlanetBackground() {
   layer.className = 'planet-background'
   layer.setAttribute('aria-hidden', 'true')
 
-  planets = PLANETS.map((src) => {
+  planets = []
+
+  for (let index = 0; index < PLANETS.length; index += 1) {
+    const src = PLANETS[index]
     const img = document.createElement('img')
     img.className = 'planet-background__planet'
     img.src = src
@@ -24,8 +27,8 @@ export function setupPlanetBackground() {
     img.draggable = false
     img.decoding = 'async'
     layer.append(img)
-    return img
-  })
+    planets.push(img)
+  }
 
   document.body.append(layer)
 

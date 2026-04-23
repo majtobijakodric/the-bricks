@@ -76,16 +76,12 @@ export function showPadSpeedSweet(value) {
   })
 }
 
-export function showPlayerNameSweet({
-  title,
-  inputValue = '',
-  allowCancel = false,
-}) {
+export function showPlayerNameSweet({ title, inputValue = '', allowCancel = false }) {
   return fireSweet({
     title,
     input: 'text',
     inputValue,
-    inputLabel: 'Player name',
+    inputLabel: 'Change player name',
     inputPlaceholder: 'Type your name',
     confirmButtonText: 'Save',
     showCancelButton: allowCancel,
@@ -124,12 +120,15 @@ export function showWinSweet() {
 
 export function showModeSweet(currentMode) {
   const modes = ['easy', 'medium', 'hard', 'experimental']
-  const optionButtons = modes.map((mode) => {
+  let optionButtons = ''
+
+  for (let index = 0; index < modes.length; index += 1) {
+    const mode = modes[index]
     const label = mode.charAt(0).toUpperCase() + mode.slice(1)
     const isSelected = currentMode === mode
     const experimentalClass = mode === 'experimental' ? ' is-experimental' : ''
 
-    return `
+    optionButtons += `
       <button
         type="button"
         class="swal2-styled mode-option${isSelected ? ' is-selected' : ''}${experimentalClass}"
@@ -138,7 +137,7 @@ export function showModeSweet(currentMode) {
         ${label}
       </button>
     `
-  }).join('')
+  }
 
   return new Promise((resolve) => {
     let settled = false

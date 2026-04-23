@@ -130,16 +130,8 @@ function setStorageState(state) {
   localStorage.setItem(scoreHistoryStorageKey, JSON.stringify(safeState))
 }
 
-function promptForPlayerName({
-  title,
-  inputValue = '',
-  allowCancel = false,
-}) {
-  return showPlayerNameSweet({
-    title,
-    inputValue,
-    allowCancel,
-  })
+function promptForPlayerName({ title, inputValue = '', allowCancel = false, }) {
+  return showPlayerNameSweet({ title, inputValue, allowCancel, })
 }
 
 function buildStoredScoreRun(score, didFinish, mode) {
@@ -187,7 +179,6 @@ export async function ensurePlayerNameBeforeFirstPlay() {
 
 export async function promptToRenameCurrentPlayer() {
   const result = await promptForPlayerName({
-    title: 'Change player name',
     inputValue: getCurrentPlayerName(),
     allowCancel: true,
   })
@@ -200,31 +191,23 @@ export async function promptToRenameCurrentPlayer() {
 }
 
 export function ensureRenamePlayerButton(onRenamed) {
-  const pauseButton = document.querySelector('#pauseButton')
+  const button = playerNameButton
 
-  if (!pauseButton || !pauseButton.parentElement) {
+  if (!button) {
     return null
   }
 
-  let button = document.querySelector(`#${playerNameButton}`)
-
-  if (!button) {
-    button = document.createElement('button')
-    button.id = playerNameButton
-    button.type = 'button'
-    button.className = pauseButton.className
-    button.title = 'Change player name'
-    button.setAttribute('aria-label', 'Change player name')
-    button.replaceChildren(createElement(User, { width: 18, height: 18 }))
-    pauseButton.insertAdjacentElement('afterend', button)
-  }
+  button.title = 'Change player name'
+  button.setAttribute('aria-label', 'Change player name')
+  button.replaceChildren(createElement(User, { width: 18, height: 18 }))
 
   button.onclick = async () => {
-    const nextName = await promptToRenameCurrentPlayer()
-
     if (typeof onRenamed === 'function') {
-      onRenamed(nextName)
+      await onRenamed()
+      return
     }
+
+    await promptToRenameCurrentPlayer()
   }
 
   return button

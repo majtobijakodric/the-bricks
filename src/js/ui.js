@@ -4,7 +4,7 @@ import { abilityMessage, aboutButton, blueAbilityButton, blueAbilityCount, blueA
 import { featureConfig, modeConfig } from './config.js'
 import { launchRocketFromPad, movePadBy, setPadSpeed, setRocketSpeed } from './entities.js'
 import { currentScore, fuel, input, isGameOver, isPaused, isRocketLaunched, pad, pauseGame, restartGame, resumeGame, rocket } from './game.js'
-import { ensureRenamePlayerButton, renderScoreHistoryMarkup, saveScore } from './score-history.js'
+import { ensureRenamePlayerButton, promptToRenameCurrentPlayer, renderScoreHistoryMarkup, saveScore } from './score-history.js'
 import { showAboutSweet, showGameOverSweet, showHowToPlaySweet, showModeSweet, showPadSpeedSweet, showRocketSpeedSweet, showScoreSweet, showWinSweet } from './sweet.js'
 import { renderScene } from './render.js'
 
@@ -274,7 +274,9 @@ export function initializeUi() {
     })
   }
 
-  ensureRenamePlayerButton()
+  ensureRenamePlayerButton(async () => {
+    await runPausedSweet(promptToRenameCurrentPlayer)
+  })
 
   if (rocketSpeedButton) {
     rocketSpeedButton.addEventListener('click', () => {
