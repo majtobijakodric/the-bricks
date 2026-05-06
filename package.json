@@ -1,6 +1,6 @@
 {
   "name": "bricks",
-  "homepage": "https://majtobijakodric.github.io/the-bricks",
+  "homepage": "https://majtobijakodric.github.io/space-bricks",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,9 +15,6 @@
     "vite": "^8.0.1"
   },
   "dependencies": {
-    "@fontsource/jetbrains-mono": "^5.2.8",
-    "@fontsource/orbitron": "^5.2.8",
-    "@fontsource/oxanium": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
     "gh-pages": "^6.3.0",
     "lucide": "^1.7.0",
