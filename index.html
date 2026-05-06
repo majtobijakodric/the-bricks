@@ -1,83 +1,88 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/src/assets/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Space Bricks</title>
-  </head>
-  <body>
-    <div id="app" class="min-h-screen px-4 py-6">
-      <div class="game-shell mx-auto flex w-full flex-col items-center gap-4">
-        <div class="w-full rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 shadow-xl">
-          <div class="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex min-w-0 flex-1 flex-wrap items-center justify-start gap-2 lg:gap-4">
-              <div class="ability-menu flex min-w-0 flex-nowrap items-center gap-2 self-stretch">
-                <button id="redAbilityButton" type="button" class="ability-button" aria-label="Activate red rock ability">
-                  <img id="redAbilityIcon" class="ability-icon" alt="Red rock ability icon" />
-                  <span id="redAbilityCount" class="ability-count" aria-hidden="true"></span>
-                </button>
 
-                <button id="blueAbilityButton" type="button" class="ability-button" aria-label="Activate blue rock ability">
-                  <img id="blueAbilityIcon" class="ability-icon" alt="Blue rock ability icon" />
-                  <span id="blueAbilityCount" class="ability-count" aria-hidden="true"></span>
-                </button>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/src/assets/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Bricks</title>
+</head>
 
-                <button id="currentScoreButton" type="button"
-                  class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-                </button>
+<body>
+  <div id="app" class="min-h-screen px-4 py-6">
+    <div class="game-shell mx-auto flex w-full flex-col items-center gap-4">
+      <div class="w-full rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 shadow-xl">
+        <div class="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div class="flex min-w-0 flex-1 flex-wrap items-center justify-start gap-2 lg:gap-4">
+            <div class="ability-menu flex min-w-0 flex-nowrap items-center gap-2 self-stretch">
+              <button id="redAbilityButton" type="button" class="ability-button" aria-label="Activate red rock ability">
+                <img id="redAbilityIcon" class="ability-icon" alt="Red rock ability icon" />
+                <span id="redAbilityCount" class="ability-count" aria-hidden="true"></span>
+              </button>
 
-                <p id="abilityMessage" class="ability-message" aria-live="polite"></p>
-                </div>
+              <button id="blueAbilityButton" type="button" class="ability-button"
+                aria-label="Activate blue rock ability">
+                <img id="blueAbilityIcon" class="ability-icon" alt="Blue rock ability icon" />
+                <span id="blueAbilityCount" class="ability-count" aria-hidden="true"></span>
+              </button>
 
+              <button id="currentScoreButton" type="button"
+                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+              </button>
+
+              <p id="abilityMessage" class="ability-message" aria-live="polite"></p>
             </div>
 
-            <div class="flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-2">
-              <button id="rocketSpeedButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-                Rocket speed
-              </button>
-
-              <button id="padSpeedButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-                Pad speed
-              </button>
-
-              <button id="modeButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-                Mode
-              </button>
-
-              <button id="pauseButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-              </button>
-
-              <button id="playerNameButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow"
-                title="Change player name" aria-label="Change player name">
-              </button>
-
-              <button id="howToPlayButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-              </button>
-
-              <button id="aboutButton" type="button"
-                class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
-              </button>
-            </div>
           </div>
-        </div>
 
-        <div class="flex flex-col items-center gap-2 lg:flex-row lg:items-stretch">
-          <canvas id="gameCanvas" width="800" height="600"
-            class="block rounded-lg border border-slate-700 shadow-2xl"></canvas>
+          <div class="flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-2">
+            <button id="rocketSpeedButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+              Rocket speed
+            </button>
 
-          <div class="flex w-4 shrink-0 self-stretch overflow-hidden rounded-md border border-slate-700/80 bg-slate-900 lg:mt-0">
-            <div id="fuelTankFill" class="h-full w-full origin-bottom rounded-md bg-emerald-400"></div>
+            <button id="padSpeedButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+              Pad speed
+            </button>
+
+            <button id="modeButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+              Mode
+            </button>
+
+            <button id="pauseButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+            </button>
+
+            <button id="playerNameButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow"
+              title="Change player name" aria-label="Change player name">
+            </button>
+
+            <button id="howToPlayButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+            </button>
+
+            <button id="aboutButton" type="button"
+              class="control-button rounded-md bg-slate-800 px-3 py-1.5 text-sm font-medium text-white shadow">
+            </button>
           </div>
         </div>
       </div>
+
+      <div class="flex flex-col items-center gap-2 lg:flex-row lg:items-stretch">
+        <canvas id="gameCanvas" width="800" height="600"
+          class="block rounded-lg border border-slate-700 shadow-2xl"></canvas>
+
+        <div
+          class="flex w-4 shrink-0 self-stretch overflow-hidden rounded-md border border-slate-700/80 bg-slate-900 lg:mt-0">
+          <div id="fuelTankFill" class="h-full w-full origin-bottom rounded-md bg-emerald-400"></div>
+        </div>
+      </div>
     </div>
-    <script type="module" src="/src/js/main.js"></script>
-  </body>
+  </div>
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+
 </html>
