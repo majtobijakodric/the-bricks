@@ -1,14 +1,11 @@
 # Space Bricks
 
-<<<<<<< HEAD
-Space Bricks is a small canvas game inspired by brick breaker games. The player moves the pad with the keyboard, launches a rocket, breaks asteroids, collects ability charges, and tries to keep enough fuel until all asteroids are gone.
-=======
 A space-themed brick breaker where you guide a rocket through an asteroid field, manage limited fuel, collect charged abilities, and clear the entire sector to win.
 
 ## Features
 
 - **Asteroid Field Gameplay** - Bounce the rocket off the pad and clear a 4 x 12 asteroid layout.
-- **Fuel System** - Fuel drains during flight and when the rocket drops below the play area; gray asteroids restore fuel.
+- **Fuel System** - Fuel drains during flight; when the rocket drops below the play area, it bounces back and loses 0.5 fuel. Gray asteroids restore fuel.
 - **Ability System** - Blue and red asteroids charge abilities that apply random temporary gameplay effects.
 - **Difficulty Modes** - Easy, Medium, Hard, and Experimental presets change rocket and pad speed through a SweetAlert2 mode picker.
 - **Experimental Controls** - Experimental mode also exposes SweetAlert sliders for manual rocket and pad speed tuning.
@@ -26,29 +23,24 @@ A space-themed brick breaker where you guide a rocket through an asteroid field,
 
 ## Project Structure
 
-```
+```text
 src/
   js/
-    main.js         # App bootstrap
-    game.js         # Game state, loop, and effect system
-    entities.js     # Rocket, pad, asteroid entities and collisions
-    abilities.js    # Ability charging and effect application
-    config.js       # Game settings, modes, and feature flags
-    canvas.js       # Canvas and button element wiring
-    ui.js           # HUD, modals, and UI updates
-    render.js       # Canvas drawing
+    main.js           # App bootstrap, game loop, input, rendering
+    gameLogic.js      # Score, fuel, asteroids, abilities, reset/end logic
+    rocketAndPad.js   # Rocket, pad, wall, and pad movement/collision
+    localStorage.js   # Player name and score history persistence
+    swalMenus.js      # SweetAlert2 menus and dialogs
   assets/
-    background/     # Space background image
-    rocks/          # Asteroid sprite sheets (blue, gray, normal, red)
-    rockets/        # Rocket sprites
-    sound/          # Audio assets
+    background/       # Space background images
+    rocks/            # Asteroid sprites
+    rockets/          # Rocket sprites
+    sound/            # Audio assets
   style/
-    style.css       # Global styling and Tailwind
-index.html          # Game shell and HUD layout
-vite.config.js      # Vite config and GitHub Pages base path
-package.json        # Scripts and dependencies
+    style.css         # Global styling and Tailwind
+index.html            # Game shell and HUD layout
+vite.config.js        # Vite config and GitHub Pages base path
 ```
->>>>>>> 9154cd70c7467635d2b4ca6fe31bf9759e34b265
 
 ## Controls
 
@@ -63,7 +55,8 @@ package.json        # Scripts and dependencies
 - Gray asteroids give 3 points and restore fuel.
 - Blue asteroids give 5 points and one blue ability charge.
 - Red asteroids give 10 points and one red ability charge.
-- The game ends when fuel reaches zero or the rocket falls below the screen.
+- If the rocket misses the pad and drops below the play area, it bounces back and loses 0.5 fuel.
+- The game ends when fuel reaches zero.
 - The player wins after clearing all asteroids.
 
 ## Abilities
@@ -108,9 +101,8 @@ Deploy to GitHub Pages:
 npm run deploy
 ```
 
-<<<<<<< HEAD
 The GitHub Pages base path is set to `/space-bricks/` in `vite.config.js`.
-=======
+
 ## Credits
 
 Asteroid sprites: [Pixel Art Top Down Rocks Pack](https://dustdfg.itch.io/pixel-art-top-down-rocks-pack) by dustdfg
@@ -120,4 +112,3 @@ Space background: [Space Background Generator](https://deep-fold.itch.io/space-b
 ## License
 
 MIT License. See [LICENSE](LICENSE) for the full text.
->>>>>>> 9154cd70c7467635d2b4ca6fe31bf9759e34b265

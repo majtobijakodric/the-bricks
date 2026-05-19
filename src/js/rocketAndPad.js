@@ -29,7 +29,10 @@ export function moveRocket(state, pad, rocket) {
 }
 
 export function checkWalls(state, rocket, width, height) {
-  if (!state.rocketStarted) return false
+  const bottomBounceFuelCost = 0.5
+  const bottomBounceDepth = 80
+
+  if (!state.rocketStarted) return
   if (rocket.x - rocket.radius <= 0) {
     rocket.x = rocket.radius
     rocket.dx = Math.abs(rocket.dx)
@@ -42,7 +45,12 @@ export function checkWalls(state, rocket, width, height) {
     rocket.y = rocket.radius
     rocket.dy = Math.abs(rocket.dy)
   }
-  return rocket.y - rocket.radius > height + 80
+  if (rocket.dy > 0 && rocket.y - rocket.radius > height + bottomBounceDepth) {
+    rocket.y = height + bottomBounceDepth + rocket.radius
+    rocket.dy = -Math.abs(rocket.dy)
+    state.fuel -= bottomBounceFuelCost
+    if (state.fuel < 0) state.fuel = 0
+  }
 }
 
 export function checkPad(state, pad, rocket) {

@@ -238,11 +238,9 @@ function gameLoop() {
     moveRocket(state, pad, rocket)
 
     countEffectFrames(state, ui, () => { updateSpeeds(state, pad, rocket) })
+    checkWalls(state, rocket, width, height)
     burnFuel(state, fuelFill, maxFuel)
 
-    if (checkWalls(state, rocket, width, height)) {
-      finishGame(state, false, saveScore, showEndMenu, resetGameState)
-    }
     checkPad(state, pad, rocket)
     checkAsteroids(state, rocket, maxFuel, ui)
     const result = checkEnd(state)
