@@ -1,13 +1,18 @@
+// Get the stored player name.
+// Returns the trimmed name string, or an empty string if not set.
 export function playerName() {
   const name = localStorage.getItem('playerName')
   if (name === null) return ''
   return name.trim()
 }
 
+// Save the player's name to localStorage after trimming whitespace.
 export function setPlayerName(name) {
   localStorage.setItem('playerName', name.trim())
 }
 
+// Record a new score entry in localStorage.
+// Increments the run counter and saves player, score, mode, timestamp, and win flag.
 export function saveScore(score, mode, won) {
   let count = Number(localStorage.getItem('scoreCount'))
   if (Number.isNaN(count)) count = 0
@@ -21,6 +26,8 @@ export function saveScore(score, mode, won) {
   else localStorage.setItem('score' + count + 'Won', 'no')
 }
 
+// Build HTML fragment showing the current score and past runs from localStorage.
+// Escapes stored values using `clean` and formats timestamps with `timeText`.
 export function scoreHtml(score) {
   const count = Number(localStorage.getItem('scoreCount'))
   let html = '<div class="score-history-panel text-left text-sm leading-6"><p>Current score: <strong>' + score + '</strong></p>'
@@ -40,6 +47,7 @@ export function scoreHtml(score) {
   return html + '</ol></div></div>'
 }
 
+// Escape special HTML characters in a string to prevent injection when building HTML.
 function clean(value) {
   let text = ''
   if (value === null) return ''
@@ -56,13 +64,14 @@ function clean(value) {
   return text
 }
 
+// Convert a stored timestamp (milliseconds) into a readable date/time string.
+// Returns 'Unknown date' for invalid input, otherwise 'HH:MM DD.MM.YYYY'.
 function timeText(value) {
-  const date = new Date(Number(value))
-  if (Number.isNaN(date.getTime())) return 'Unknown date'
-  return zero(date.getHours()) + ':' + zero(date.getMinutes()) + ' ' + zero(date.getDate()) + '.' + zero(date.getMonth() + 1) + '.' + date.getFullYear()
-}
-
-function zero(number) {
-  if (number < 10) return '0' + number
-  return number
+  const millis = Number(value)
+  const date = new Date(millis)
+  if (date.toString() === 'Invalid Date') return 'Unknown date'
+  function two(n) {
+    return String(n).padStart(2, '0')
+  }
+  return two(date.getHours()) + ':' + two(date.getMinutes()) + ' ' + two(date.getDate()) + '.' + two(date.getMonth() + 1) + '.' + date.getFullYear()
 }
